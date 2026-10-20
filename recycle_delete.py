@@ -66,6 +66,10 @@ def recycle(path):
     aborted = bool(op.fAnyOperationsAborted)
 
     if res != 0:
+        # SHFileOperationW 有时删除成功却返回 2（ERROR_FILE_NOT_FOUND），
+        # 返回码不可信，要以「路径还在不在」为准
+        if not os.path.exists(path):
+            return ("OK", size, res)
         return ("ERROR", size, res)
     if aborted:
         return ("ABORTED", size, res)
