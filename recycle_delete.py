@@ -81,4 +81,7 @@ if __name__ == "__main__":
     ]
     for t in targets:
         status, size, code = recycle(t)
-        print(f"{status}\t{size / 1024 / 1024:.0f} MB\tcode={code}\t{t}", flush=True)
+        msg = ""
+        if status == "ERROR":
+            msg = explain(code)
+        print(f"{status}\t{size / 1024 / 1024:.0f} MB\tcode={code}\t{t}\t{msg}", flush=True)

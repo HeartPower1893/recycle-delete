@@ -22,9 +22,10 @@ python recycle_delete.py "C:\path\a" "C:\path\b"
 ```
 OK      7162 MB  code=0  C:\Users\...\Cities_Skylines
 MISSING 0 MB     code=0  C:\not\exist
+ERROR   0 MB     code=5  C:\locked\x        权限不足或文件正被占用，先关掉相关程序再试
 ```
 
-状态含义：`OK` 已进回收站 / `MISSING` 路径不存在 / `STILL_EXISTS` 文件仍存在（可能被占用）/ `ABORTED` 用户取消 / `ERROR` 系统返回错误码。
+状态含义：`OK` 已进回收站 / `MISSING` 路径不存在 / `STILL_EXISTS` 文件仍存在（可能被占用）/ `ABORTED` 用户取消 / `ERROR` 系统返回错误码，并在行尾附一句中文说明（字典里没有的码会提示把数字反馈）。
 
 ## 已知不足
 
@@ -32,7 +33,7 @@ MISSING 0 MB     code=0  C:\not\exist
 
 - [ ] 没有 `--dry-run`，不能先看要删什么再决定
 - [ ] 不支持通配符和批量清单文件
-- [ ] 出错时只有数字错误码，没有可读的说明
+- [x] 出错时只有数字错误码，没有可读的说明
 - [ ] 只支持 Windows
 - [ ] 没有单元测试
 
