@@ -8,7 +8,19 @@ FOF_SILENT = 0x0004
 FOF_NOCONFIRMATION = 0x0010
 FOF_ALLOWUNDO = 0x0040
 FOF_NOERRORUI = 0x0400
+ERROR_MESSAGES={
+    2:"路径不存在，可能已经被删除掉了",
+    3:"上一级文件夹不存在，检查路径有没有打错",
+    5:"权限不足或文件正被占用，先关掉相关程序再试",
+    32:"文件正被另一个程序打开，关掉它再试",
+    123:"路径里有非法字符或太长，换个简短路径试试",
+}
 
+def explain(code):
+    msg=ERROR_MESSAGES.get(code)
+    if msg is None:
+        return f"未知错误({code}),请把这个数字告诉我"
+    return msg
 
 class SHFILEOPSTRUCTW(ctypes.Structure):
     _fields_ = [
