@@ -15,7 +15,7 @@ python recycle_delete.py "C:\some\path\to\remove"
 python recycle_delete.py "C:\path\a" "C:\path\b"
 ```
 
-不带参数时，会使用脚本里写的默认路径（可自行修改）。
+必须至少传一个路径。不带参数时会打印用法，并以退出码 `1` 结束——不会有任何默认路径被删。
 
 输出格式：
 

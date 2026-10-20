@@ -75,10 +75,11 @@ def recycle(path):
 
 
 if __name__ == "__main__":
-    targets = sys.argv[1:] or [
-        r"C:\Users\codeg\AppData\Local\Colossal Order\Cities_Skylines",
-        r"C:\Users\codeg\AppData\LocalLow\Colossal Order\Cities Skylines II",
-    ]
+    targets = sys.argv[1:]
+    if not targets:
+        print("用法：python recycle_delete.py <路径> [路径...]")
+        print(r'例：  python recycle_delete.py "C:\Temp\old"')
+        sys.exit(1)
     for t in targets:
         status, size, code = recycle(t)
         msg = ""
