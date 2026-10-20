@@ -41,6 +41,7 @@ ERROR   0 MB     code=5  C:\locked\x        权限不足或文件正被占用，
 
 - `SHFileOperationW` 要求路径以双 `\0` 结尾，所以用 `create_unicode_buffer(path + "\0", len(path) + 2)` 构造缓冲区，而不是直接传字符串。这一步写错会出现各种诡异行为。
 - `dir_size` 用 `os.walk` 而非 `os.path.getsize`，因为目录本身不占空间，要累加内部文件。
+- `SHFileOperationW` 的返回值不可全信：删真实目录时可能返回 `2`（ERROR_FILE_NOT_FOUND），但文件其实已经进了回收站。所以 `res != 0` 时要再看一眼 `os.path.exists(path)`，路径没了就判成功。
 
 ## 许可
 
